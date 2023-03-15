@@ -1,0 +1,98 @@
+﻿
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FinalProject" xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="FinalProject.MainPage">
+
+    <StackLayout Padding="10" BackgroundColor="AliceBlue">
+        <Image x:Name="logo"  WidthRequest="50" HeightRequest="50"/>
+        <StackLayout Margin="30">
+            <Entry x:Name="summoner"  WidthRequest="20"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button x:Name="search" WidthRequest="100" Text="Search" CornerRadius="20" BackgroundColor="Blue" TextColor="White" Clicked="OnGetButtonClicked"/>
+            <Button x:Name="reset" WidthRequest="100" Text="Reset" CornerRadius="20" BackgroundColor="Red" TextColor="White" Clicked="Reset_Button"/>
+        </StackLayout>
+        <ListView x:Name="lv" WidthRequest="50" HeightRequest="250" BackgroundColor="White" ItemTapped="Clicked">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Frame CornerRadius="100" IsClippedToBounds="True">
+                                    <Image Source="{Binding Icon}" WidthRequest="100"/>
+                                </Frame>
+                                <StackLayout Spacing="50">
+                                    <Label FontSize="25" FontAttributes="Bold" Text="{Binding SummonerId}" TextColor="Black"></Label>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                                        <Frame WidthRequest="25" BackgroundColor="Black" HorizontalOptions="Start">
+                                            <Label FontAttributes="Bold" Text="{Binding SummonerLvl}" HorizontalOptions="Start" TextColor="White"/>
+                                        </Frame>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Picker x:Name="QueuePicker" Title="Select a Queue Type" SelectedIndexChanged="Picker_IndexChange">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Ranked Solo</x:String>
+                    <x:String>Ranked Flex</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <ListView x:Name="lv2" WidthRequest="50" HeightRequest="250" BackgroundColor="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Spacing="20">
+                            <Image Source="{Binding RankImages}" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center"/>
+                            <StackLayout Spacing="30">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Tier}" FontAttributes="Bold" TextColor="Black"></Label>
+                                    <Label Text="{Binding Rank}" FontAttributes="Bold" TextColor="Black"></Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Wins, StringFormat='{0} wins'}"  TextColor="Gray"></Label>
+                                    <Label Text="{Binding Lose, StringFormat='{0} loses'}" TextColor="Gray"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <skia:SKCanvasView  x:Name="view1" PaintSurface="OnCanvasViewPaintSurface" WidthRequest="120" HeightRequest="60"/>
+                                <Label Text="{Binding WinRate, StringFormat='{0}%'}" FontAttributes="Bold" TextColor="Blue" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="lv3" WidthRequest="50" HeightRequest="250" BackgroundColor="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Spacing="20">
+                            <Image Source="{Binding RankImages}" HeightRequest="100" WidthRequest="100" HorizontalOptions="Center"/>
+                             <StackLayout Spacing="30">
+                                   <StackLayout Orientation="Horizontal">
+                                       <Label Text="{Binding Tier}" FontAttributes="Bold" TextColor="Black"></Label>
+                                       <Label Text="{Binding Rank}" FontAttributes="Bold" TextColor="Black"></Label>
+                                   </StackLayout>
+                                   <StackLayout Orientation="Horizontal">
+                                       <Label Text="{Binding Wins, StringFormat='{0} wins'}"  TextColor="Gray"></Label>
+                                       <Label Text="{Binding Lose, StringFormat='{0} loses'}" TextColor="Gray"></Label>
+                                   </StackLayout>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <skia:SKCanvasView  x:Name="view2" PaintSurface="OnCanvasViewPaintSurface" WidthRequest="120" HeightRequest="60"/>
+                                <Label Text="{Binding WinRate, StringFormat='{0}%'}" FontAttributes="Bold" TextColor="Blue" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
